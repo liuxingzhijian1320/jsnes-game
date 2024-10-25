@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>游戏加载中...</title>
+	<link rel="stylesheet" href="./styles.css">
+	<script>
+		var _hmt = _hmt || [];
+		(function () {
+			var hm = document.createElement("script");
+			hm.src = "https://hm.baidu.com/hm.js?4dc655ed71352ec8dc3a35a2e9d29283";
+			var s = document.getElementsByTagName("script")[0];
+			s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
+	<script type="text/javascript" src="lib/jsnes.min.js"></script>
+	<script type="text/javascript" src="nes-embed.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<div class="content">
+			<canvas id="nes-canvas" width="256" height="240" />
+		</div>
+	</div>
+	<div id="mask" class="start-container">
+		<h1 id="title">加载中～</h1>
+		<button id="start-button" class="start-button">开始游戏</button>
+		<p class="tip">
+			【方向: 上下左右箭头】 【开始: Enter键】 【按钮1: A】 【按钮2: S】
+		</p>
+	</div>
+	<script>
+		const gameName = new URLSearchParams(window.location.search).get('game') || '超级魂斗罗'
+		document.title = gameName
+		document.querySelector('#title').innerHTML = gameName
+		const mask = document.getElementById('mask')
+		const button = document.getElementById('start-button')
+		button.onclick = () => {
+			nes_load_url("nes-canvas", `nes/${gameName}.nes`);
+			mask.style.display = 'none'
+		}
+	</script>
+</body>
+
+</html>

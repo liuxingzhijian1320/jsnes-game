@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>摸鱼游戏</title>
+    <style>
+      #game {
+        padding: 100px 0px;
+      }
+
+      .layout {
+        width: 1000px;
+        margin: 0 auto;
+      }
+
+      .pageTitle {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .ul {
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        grid-template-columns: repeat(auto-fill, 300px);
+      }
+
+      .li {
+        width: 300px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 10px;
+        display: flex;
+        margin-bottom: 10px;
+        position: relative;
+        overflow: hidden;
+        box-sizing: border-box;
+      }
+
+      .li img {
+        border-radius: 8px;
+      }
+
+      .mask {
+        opacity: 0;
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        transition: opacity 0.3s linear;
+        z-index: 1;
+      }
+
+      .mask-btn {
+        background: #2fc26e;
+        color: #fff;
+        font-size: 14px;
+        width: 70px;
+        height: 30px;
+        border-radius: 4px;
+        cursor: pointer;
+        position: absolute;
+        z-index: 10;
+      }
+
+      .li:hover > .mask {
+        opacity: 1;
+        color: red;
+      }
+
+      .info {
+        padding-left: 10px;
+      }
+
+      .title {
+        font-size: 16px;
+        font-weight: 500;
+        color: #333;
+      }
+
+      .subtitle {
+        font-size: 12px;
+        color: #999;
+        margin-top: 8px;
+      }
+      .dc {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="layout" id="game">
+      <h3 class="pageTitle">游戏娱乐</h3>
+      <ul class="ul" id="game-list"></ul>
+    </div>
+    <script>
+      const games = [
+        { id: 1, title: "超级魂斗罗", subtitle: "无敌版本，好玩推荐，" },
+        { id: 2, title: "魂斗罗6", subtitle: "蹦无限高版，好玩推荐，" },
+        { id: 3, title: "快打旋风", subtitle: "无敌版本，好玩推荐，" },
+        { id: 4, title: "超级玛丽", subtitle: "无敌版本，好玩推荐，" },
+        { id: 5, title: "冒险岛4", subtitle: "无敌版本，好玩推荐，" },
+        { id: 6, title: "双截龙2", subtitle: "无敌版本，好玩推荐，" },
+        { id: 7, title: "坦克大作战", subtitle: "童年回忆，没有太多介绍" },
+        { id: 8, title: "影子传说", subtitle: "童年回忆，没有太多介绍" },
+        { id: 9, title: "中国象棋", subtitle: "童年回忆，没有太多介绍" },
+        { id: 10, title: "俄罗斯方块", subtitle: "注意同时按A+S才可以开始" },
+        {
+          id: 11,
+          title: "克鲁姆",
+          subtitle: "翻牌子游戏，需要同时出现相同的牌子",
+        },
+        { id: 12, title: "植物大战僵尸", subtitle: "童年回忆，没有太多介绍" },
+      ];
+
+      function openGame(title) {
+        window.open(`./game.html?game=${title}`, "_blank");
+      }
+
+      window.onload = function () {
+        const gameList = document.getElementById("game-list");
+        games.forEach((game) => {
+          const li = document.createElement("li");
+          li.className = "li";
+          li.innerHTML = `
+          <img style="width: 60px; height: 60px" src="./images/${game.title}.png" alt="${game.title}" />
+          <div class="info">
+            <div class="title">${game.title}</div>
+            <div class="subtitle">${game.subtitle}</div>
+          </div>
+					<div class="mask dc">
+						<div class="mask-btn dc" onclick="openGame('${game.title}')">开始游戏</div>
+					</div>
+          
+        `;
+          gameList.appendChild(li);
+        });
+      };
+    </script>
+  </body>
+</html>
